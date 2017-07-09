@@ -1,10 +1,13 @@
 package com.evolutionnext.vertx;
 
+import com.evolutionnext.vertx.verticle.MyVerticleListener;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
 
-public class VertxHttpServer {
+public class $12_HTTPServer {
     public static void main(String[] args) {
         System.out.println("Here we go!");
         final Vertx vertx = Vertx.vertx();
@@ -12,8 +15,9 @@ public class VertxHttpServer {
         httpServer.requestHandler(request -> {
             System.out.println(request.absoluteURI());
             System.out.println(request.method());
-            vertx.eventBus().send("latest-news", "Request Received to: " + request.path());
+            vertx.eventBus().publish("latest-news", "Request Received to: " + request.path());
             HttpServerResponse response = request.response();
+            response.setStatusCode(200);
             response.end("Message Received");
         });
         httpServer.listen(8082, httpServerAsyncResult -> {
@@ -24,7 +28,7 @@ public class VertxHttpServer {
                 httpServerAsyncResult.cause().printStackTrace();
             }
         });
-        vertx.deployVerticle(new MyVerticle(), event -> {
+        vertx.deployVerticle(new MyVerticleListener(), event -> {
             if(event.succeeded()) {
                 System.out.println("Verticle deployed");
             } else if (event.failed()) {
