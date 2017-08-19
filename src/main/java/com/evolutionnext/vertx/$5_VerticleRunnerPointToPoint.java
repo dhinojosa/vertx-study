@@ -14,7 +14,9 @@ public class $5_VerticleRunnerPointToPoint {
         vertx.deployVerticle(new MyVerticleListener(), options);
         vertx.deployVerticle(new MyVerticleListener(), options, event -> {
             if (event.succeeded()) {
-                vertx.eventBus().publish("latest-news", "Justin Bieber imprisoned, nations rejoice");
+                System.out.println("Ready to send");
+                vertx.eventBus().send("latest-news",
+                        "Justin Bieber imprisoned, nations rejoice");
             }
         });
         Thread.sleep(15000);

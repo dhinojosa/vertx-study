@@ -8,6 +8,7 @@ public class MyVerticle extends AbstractVerticle {
     public void start(Future<Void> startFuture) throws Exception {
         System.out.printf("Starting up the Verticle in Thread: %s\n",
                 Thread.currentThread().getName());
+        //doSomething
         startFuture.complete(); //Send when complete
     }
 

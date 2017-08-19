@@ -15,7 +15,8 @@ public class $12_HTTPServer {
         httpServer.requestHandler(request -> {
             System.out.println(request.absoluteURI());
             System.out.println(request.method());
-            vertx.eventBus().publish("latest-news", "Request Received to: " + request.path());
+            vertx.eventBus().publish("latest-news",
+                    "Request Received to: " + request.path());
             HttpServerResponse response = request.response();
             response.setStatusCode(200);
             response.end("Message Received");

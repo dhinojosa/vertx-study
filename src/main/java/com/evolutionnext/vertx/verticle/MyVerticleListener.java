@@ -10,7 +10,8 @@ public class MyVerticleListener extends AbstractVerticle {
         System.out.printf("Starting up the verticle in Thread: %s\n",
                 Thread.currentThread().getName());
         getVertx().eventBus().<String>consumer("latest-news", event -> {
-            System.out.format("event.body %s in Thread: %s\n", event.body(), Thread.currentThread().getName());
+            System.out.format("event.body %s in Thread: %s\n",
+                    event.body(), Thread.currentThread().getName());
         });
         System.out.println("Receiver ready!");
     }

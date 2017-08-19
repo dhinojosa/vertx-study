@@ -22,8 +22,6 @@ public class $13_VerticleClustered {
                              .publish("latest-news", "Justin Bieber imprisoned, nations rejoice");
                     }
                 });
-            } else {
-
             }
         });
     }

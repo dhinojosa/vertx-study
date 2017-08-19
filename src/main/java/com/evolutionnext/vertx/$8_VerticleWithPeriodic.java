@@ -8,9 +8,13 @@ public class $8_VerticleWithPeriodic {
     public static void main(String[] args) throws InterruptedException {
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new MyVerticleListener());
-        vertx.setPeriodic(1000, aLong -> vertx.eventBus().publish("latest-news",
-                "Here is your one second notice, bring out the finest wines and cheeses"));
-        Thread.sleep(15000);
+        long id = vertx.setPeriodic(1000,
+                aLong -> vertx.eventBus().publish("latest-news",
+                        "Here is your one second notice, bring out the finest wines and cheeses"));
+
+        Thread.sleep(5000);
+        vertx.cancelTimer(id);
+        Thread.sleep(1200);
         vertx.close();
     }
 }

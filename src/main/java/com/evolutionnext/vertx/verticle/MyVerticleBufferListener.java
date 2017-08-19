@@ -9,7 +9,8 @@ public class MyVerticleBufferListener extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
-        MessageConsumer<Buffer> consumer = getVertx().eventBus().consumer("my-buffer");
+        MessageConsumer<Buffer> consumer =
+                getVertx().eventBus().consumer("my-buffer");
         consumer.handler(event -> {
             Buffer body = event.body();
             System.out.println(body.getString(0, 5, "UTF-8"));

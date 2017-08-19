@@ -12,12 +12,15 @@ public class $4_VerticleRunnerPublishSubscribe {
     public static void main(String[] args) throws InterruptedException {
         Vertx vertx = Vertx.vertx();
         DeploymentOptions options = new DeploymentOptions().setWorker(true);
+        vertx.deployVerticle(new MyVerticleListener(), options);
+        vertx.deployVerticle(new MyVerticleListener(), options);
         vertx.deployVerticle(new MyVerticleListener(), options,
-                event -> {
-                    if (event.succeeded()) {
+                future -> {
+                    if (future.succeeded()) {
                         vertx
                                 .eventBus()
-                                .publish("latest-news", "Justin Bieber imprisoned, nations rejoice");
+                                .publish("latest-news",
+                                        "Justin Bieber imprisoned, nations rejoice");
                     }
                 });
         System.out.println("Should be sent");
